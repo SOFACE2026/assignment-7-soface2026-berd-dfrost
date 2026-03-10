@@ -73,6 +73,9 @@ public:
 
             // initialize a worker directly inside the vector using emplace_back
             workers.emplace_back(multiply_slice, factor, begin, end);
+
+            // mutexes aren't needed because modified parts of memory aren't shared between threads
+            // in other words, each thread has its own playspace, so none of the threads have to coordinate.
         }
 
         // 3) It is important that the `iterators` vector used witin the thread is not freed prematurely
